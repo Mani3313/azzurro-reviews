@@ -1,0 +1,41 @@
+<!doctype html>
+<!-- Minimal stand-in for a Booking.com property page, reproducing only the
+     data-testid structure and behaviour the collector relies on
+     (open reviews, sort select, paginated cards, truncated replies). -->
+<html><head><meta charset="utf-8"><title>Fixture Hotel</title></head>
+<body>
+<div data-testid="reviews-tab-score-header">Scored 6.8 6.8Rated pleasant 23 reviews</div>
+<button data-testid="fr-read-all-reviews">Read all reviews</button>
+<div id="panel" hidden>
+  <div data-testid="review-sorter"><select><option value="MOST_RELEVANT">Most relevant</option><option value="NEWEST_FIRST">Newest first</option></select></div>
+  <div id="cards"></div>
+  <button aria-label="Next page" id="next">Next</button>
+</div>
+<script>
+  const N = Number(new URLSearchParams(location.search).get('n') || 23);
+  const all = Array.from({ length: N }, (_, i) => {
+    const day = 28 - Math.floor(i / 2);
+    return { name: 'Guest' + i, date: day + ' September 2026', score: (i % 10) + 1, pos: i % 3 ? 'Great location ' + i : null, neg: i % 2 ? 'Dirty bathroom ' + i : null, reply: i % 4 === 0 };
+  });
+  let sorted = false, page = 0;
+  const order = () => (sorted ? all : [...all].reverse());
+  function render() {
+    const list = order().slice(page * 10, page * 10 + 10);
+    document.getElementById('cards').innerHTML = list.map((r) => `
+      <div data-testid="review-card"><div data-testid="review">
+        <div data-testid="review-avatar"><h4>${r.name}</h4><span>Australia</span></div>
+        <div data-testid="review-stay-info"><span data-testid="review-room-name">Pod</span><span data-testid="review-num-nights">2 nights ·</span><span data-testid="review-stay-date">September 2026</span><span data-testid="review-traveler-type">Solo traveller</span></div>
+        <span data-testid="review-date">Reviewed: ${r.date}</span><h4 data-testid="review-title">Title ${r.name}</h4>
+        <div data-testid="review-score"><div>Scored ${r.score}</div><div>${r.score}</div></div>
+        ${r.pos ? `<div data-testid="review-positive-text"><span><svg></svg></span><span>${r.pos}</span></div>` : ''}
+        ${r.neg ? `<div data-testid="review-negative-text"><span><svg></svg></span><span>${r.neg}</span></div>` : ''}
+        ${r.reply ? `<div data-testid="review-partner-reply"><h3>Hotel response:</h3><span class="t">Thank you for...</span><button data-testid="review-pr-toggle"><span>Continue reading</span></button></div>` : ''}
+      </div></div>`).join('');
+    document.querySelectorAll('[data-testid="review-pr-toggle"]').forEach((b) => b.onclick = () => { b.previousElementSibling.textContent = 'Thank you for staying with us, we will fix it.'; b.remove(); });
+    document.getElementById('next').disabled = (page + 1) * 10 >= N;
+  }
+  document.querySelector('[data-testid="fr-read-all-reviews"]').onclick = () => { document.getElementById('panel').hidden = false; render(); };
+  document.querySelector('select').onchange = (e) => { sorted = e.target.value === 'NEWEST_FIRST'; page = 0; setTimeout(render, 100); };
+  document.getElementById('next').onclick = () => { page++; setTimeout(render, 150); };
+</script>
+</body></html>

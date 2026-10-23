@@ -1,0 +1,115 @@
+{
+  "generatedAt": "2026-10-23T10:00:00.704Z",
+  "set": "holdout",
+  "n": 45,
+  "complaints": {
+    "precision": 0.7171717171717171,
+    "recall": 0.8765432098765432
+  },
+  "praise": {
+    "precision": 0.9264705882352942,
+    "recall": 0.8873239436619719
+  },
+  "perTopic": {
+    "complaints:cleanliness": {
+      "tp": 13,
+      "fp": 2,
+      "fn": 0
+    },
+    "complaints:pests": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    "complaints:checkin": {
+      "tp": 12,
+      "fp": 2,
+      "fn": 0
+    },
+    "complaints:staff": {
+      "tp": 7,
+      "fp": 5,
+      "fn": 1
+    },
+    "complaints:noise": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0
+    },
+    "complaints:facilities": {
+      "tp": 17,
+      "fp": 0,
+      "fn": 2
+    },
+    "complaints:room": {
+      "tp": 7,
+      "fp": 8,
+      "fn": 4
+    },
+    "complaints:safety": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 2
+    },
+    "complaints:location": {
+      "tp": 3,
+      "fp": 5,
+      "fn": 0
+    },
+    "complaints:value": {
+      "tp": 3,
+      "fp": 6,
+      "fn": 1
+    },
+    "praise:cleanliness": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 1
+    },
+    "praise:pests": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    },
+    "praise:checkin": {
+      "tp": 3,
+      "fp": 1,
+      "fn": 1
+    },
+    "praise:staff": {
+      "tp": 10,
+      "fp": 0,
+      "fn": 1
+    },
+    "praise:noise": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1
+    },
+    "praise:facilities": {
+      "tp": 8,
+      "fp": 1,
+      "fn": 3
+    },
+    "praise:room": {
+      "tp": 11,
+      "fp": 1,
+      "fn": 0
+    },
+    "praise:safety": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    },
+    "praise:location": {
+      "tp": 18,
+      "fp": 1,
+      "fn": 1
+    },
+    "praise:value": {
+      "tp": 6,
+      "fp": 1,
+      "fn": 0
+    }
+  }
+}
